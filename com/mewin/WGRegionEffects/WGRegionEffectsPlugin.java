@@ -10,6 +10,7 @@ import com.mewin.WGRegionEffects.flags.PotionEffectDesc;
 import com.mewin.WGRegionEffects.flags.PotionEffectFlag;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.flags.RegionGroup;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -34,6 +35,7 @@ public class WGRegionEffectsPlugin extends JavaPlugin {
     private WGRegionEffectsListener listener;
     
     public static Map<Player, List<PotionEffectDesc>> playerEffects = new HashMap<>();
+    public static List<Player> ignoredPlayers = new ArrayList<>();
     
     @Override
     public void onEnable()
@@ -82,6 +84,10 @@ public class WGRegionEffectsPlugin extends JavaPlugin {
             public void run() {
                 for(Player p : getServer().getOnlinePlayers())
                 {
+                    if (ignoredPlayers.contains(p))
+                    {
+                        continue;
+                    }
                     List<PotionEffectDesc> effects = playerEffects.get(p);
                     if (effects == null) {
                         continue;
