@@ -1,0 +1,4 @@
+name: WGRegionEffects
+main: com.mewin.WGRegionEffects.WGRegionEffectsPlugin
+version: 1.0
+depend: [ WorldGuard, WGCustomFlags ]
