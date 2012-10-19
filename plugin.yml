@@ -2,3 +2,16 @@ name: WGRegionEffects
 main: com.mewin.WGRegionEffects.WGRegionEffectsPlugin
 version: 1.1
 depend: [ WorldGuard, WorldEdit, WGCustomFlags ]
+
+commands:
+  toggleeffects:
+    usage: /<command>
+    permission: effects.toggle
+  te:
+    usage: /<command>
+    permission: effects.toggle
+
+permissions:
+  effects.toggle:
+    default: true
+    children: []

@@ -15,7 +15,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
@@ -74,7 +79,32 @@ public class WGRegionEffectsPlugin extends JavaPlugin {
         
         scheduleTask();
     }
-    
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if (label.equalsIgnoreCase("/toggleeffects")
+                || label.equalsIgnoreCase("/te")) {
+            if (sender instanceof Player) {
+                Player player = (Player) sender;
+
+                if (!player.hasPermission("effects.toggle")) {
+                    player.sendMessage(ChatColor.RED + "You don't have permission for that.");
+                }
+                else if (WGRegionEffectsPlugin.ignoredPlayers.contains(player)) {
+                    WGRegionEffectsPlugin.ignoredPlayers.remove(player);
+                    player.sendMessage(ChatColor.GOLD + "Region effects toggled on.");
+                } else {
+                    WGRegionEffectsPlugin.ignoredPlayers.add(player);
+                    player.sendMessage(ChatColor.GOLD + "Region effects toggled off.");
+                }
+            } else {
+                sender.sendMessage("How could a console be affected by effects?");
+            }
+            return true;
+        }
+        return false;
+    }
+
     private void scheduleTask()
     {
         getServer().getScheduler().scheduleSyncRepeatingTask(wgPlugin, new Runnable()

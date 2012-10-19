@@ -112,28 +112,4 @@ public class WGRegionEffectsListener implements Listener {
         }
         WGRegionEffectsPlugin.playerEffects.put(p, effects);
     }
-    
-    @EventHandler
-    public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent e)
-    {
-        
-        if (e.getMessage().equalsIgnoreCase("/toggleeffects") || e.getMessage().equalsIgnoreCase("/te"))
-        {
-            e.setCancelled(true);
-            if (!e.getPlayer().hasPermission("effects.toggle"))
-            {
-                e.getPlayer().sendMessage(ChatColor.RED + "You don't have permission for that.");
-            }
-            else if (WGRegionEffectsPlugin.ignoredPlayers.contains(e.getPlayer()))
-            {
-                WGRegionEffectsPlugin.ignoredPlayers.remove(e.getPlayer());
-                e.getPlayer().sendMessage(ChatColor.GOLD + "Region effects toggled on.");
-            }
-            else
-            {
-                WGRegionEffectsPlugin.ignoredPlayers.add(e.getPlayer());
-                e.getPlayer().sendMessage(ChatColor.GOLD + "Region effects toggled off.");
-            }
-        }
-    }
 }
