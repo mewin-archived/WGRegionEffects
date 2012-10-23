@@ -3,6 +3,7 @@ main: com.mewin.WGRegionEffects.WGRegionEffectsPlugin
 version: 1.1
 depend: [ WorldGuard, WGCustomFlags ]
 softdepend: [ WorldEdit ]
+authors: [ mewin ]
 
 commands:
   toggleeffects:
