@@ -9,7 +9,7 @@ import org.bukkit.potion.PotionEffectType;
 
 /**
  *
- * @author patrick
+ * @author mewin
  */
 public class PotionEffectDesc {
     private PotionEffectType type;
