@@ -37,7 +37,7 @@ public class WGRegionEffectsPlugin extends JavaPlugin {
     private WorldGuardPlugin wgPlugin;
     private WGRegionEffectsListener listener;
     
-    public static Map<Player, List<PotionEffectDesc>> playerEffects = new HashMap<>();
+    public static final Map<Player, List<PotionEffectDesc>> playerEffects = new HashMap<>();
     public static List<Player> ignoredPlayers = new ArrayList<>();
     
     @Override
@@ -109,14 +109,14 @@ public class WGRegionEffectsPlugin extends JavaPlugin {
         {
 
             @Override
-            public void run() {
+            public synchronized void run() {
                 for(Player p : getServer().getOnlinePlayers())
                 {
                     if (ignoredPlayers.contains(p))
                     {
                         continue;
                     }
-                    List<PotionEffectDesc> effects = playerEffects.get(p);
+                    List<PotionEffectDesc> effects = new ArrayList<>(playerEffects.get(p));
                     if (effects == null) {
                         continue;
                     }
@@ -127,17 +127,24 @@ public class WGRegionEffectsPlugin extends JavaPlugin {
                         {
                             PotionEffect effect = itr.next().createEffect();
                             Iterator<PotionEffect> itr2 = p.getActivePotionEffects().iterator();
-                            
+
                             while(itr2.hasNext())
                             {
                                 PotionEffect pe = itr2.next();
-                                
+
                                 if (pe.getType() == effect.getType() && pe.getDuration() > effect.getDuration())
                                 {
                                     continue CUR_POTION;
                                 }
                             }
-                            p.addPotionEffect(effect, true);
+                            if (effect.getAmplifier() != -1)
+                            {
+                                p.addPotionEffect(effect, true);
+                            }
+                            else
+                            {
+                                p.removePotionEffect(effect.getType());
+                            }
                         }
                     }
                 }
