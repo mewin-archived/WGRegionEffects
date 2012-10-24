@@ -5,7 +5,6 @@
 package com.mewin.WGRegionEffects;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import java.util.ConcurrentModificationException;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
