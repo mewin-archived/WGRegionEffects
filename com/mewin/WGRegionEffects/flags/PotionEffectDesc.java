@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mewin.WGRegionEffects.flags;
 
 import org.bukkit.potion.PotionEffect;
@@ -59,7 +55,7 @@ public class PotionEffectDesc {
             case 5:
                 return "VI";
             default:
-                return String.valueOf(amplifier);
+                return String.valueOf(amplifier + 1);
         }
     }
 }
