@@ -25,14 +25,14 @@ import org.bukkit.potion.PotionEffectType;
 public class Util {
     public static List<PotionEffectDesc> getEffectsForLocation(WorldGuardPlugin wgp, Location loc)
     {
-        Map<PotionEffectType, Entry<ProtectedRegion, PotionEffectDesc>> allEffects = new HashMap<>();
-        Map<PotionEffectType, List<ProtectedRegion>> ignoredRegions = new HashMap<>();
+        Map<PotionEffectType, Entry<ProtectedRegion, PotionEffectDesc>> allEffects = new HashMap<PotionEffectType, Entry<ProtectedRegion, PotionEffectDesc>>();
+        Map<PotionEffectType, List<ProtectedRegion>> ignoredRegions = new HashMap<PotionEffectType, List<ProtectedRegion>>();
         
         RegionManager rm = wgp.getRegionManager(loc.getWorld());
         
         if (rm == null)
         {
-            return new ArrayList<>();
+            return new ArrayList<PotionEffectDesc>();
         }
         
         for (ProtectedRegion region : rm.getApplicableRegions(loc))
@@ -55,7 +55,7 @@ public class Util {
                 }
                 else
                 {
-                    iRegions = new ArrayList<>();
+                    iRegions = new ArrayList<ProtectedRegion>();
                 }
                 
                 if (iRegions.contains(region))
@@ -78,12 +78,12 @@ public class Util {
                     || (allEffects.get(effect.getType()).getKey().getPriority() == region.getPriority()
                     &&  Math.abs(allEffects.get(effect.getType()).getValue().getAmplifier() + 1) < Math.abs(effect.getAmplifier() + 1)))
                 {
-                    allEffects.put(effect.getType(), new SimpleEntry<>(region, effect));
+                    allEffects.put(effect.getType(), new SimpleEntry<ProtectedRegion, PotionEffectDesc>(region, effect));
                 }
             }
         }
         
-        ArrayList<PotionEffectDesc> effects = new ArrayList<>();
+        ArrayList<PotionEffectDesc> effects = new ArrayList<PotionEffectDesc>();
         
         ProtectedRegion global = rm.getRegion("__global__");
         
@@ -95,7 +95,7 @@ public class Util {
             {
                 if (!allEffects.containsKey(effect.getType()))
                 {
-                    allEffects.put(effect.getType(), new SimpleEntry<>(global, effect));
+                    allEffects.put(effect.getType(), new SimpleEntry<ProtectedRegion, PotionEffectDesc>(global, effect));
                 }
             }
         }

@@ -81,22 +81,32 @@ public class PotionEffectFlag extends CustomFlag<PotionEffectDesc>{
     
     private int getAmplifier(String is) throws InvalidFlagFormat
     {
-        switch(is)
+        if (is.equalsIgnoreCase("I"))
         {
-            case "I":
-                return 0;
-            case "II":
-                return 1;
-            case "III":
-                return 2;
-            case "IV":
-                return 3;
-            case "V":
-                return 4;
-            case "VI":
-                return 5;
-            default:
-                throw new InvalidFlagFormat("Number expected, string found: " + is);
+            return 0;
+        }
+        else if (is.equalsIgnoreCase("II"))
+        {
+            return 1;
+        }
+        else if (is.equalsIgnoreCase("III"))
+        {
+            return 2;
+        }
+        else if (is.equalsIgnoreCase("IV"))
+        {
+            return 3;
+        }
+        else if (is.equalsIgnoreCase("V"))
+        {
+            return 4;
+        }
+        else if (is.equalsIgnoreCase("VI"))
+        {
+            return 5;
+        }
+        else {
+            throw new InvalidFlagFormat("Number expected, string found: " + is);
         }
     }
     

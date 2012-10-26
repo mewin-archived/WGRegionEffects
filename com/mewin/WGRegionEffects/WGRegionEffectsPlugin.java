@@ -37,8 +37,8 @@ public class WGRegionEffectsPlugin extends JavaPlugin {
     private WorldGuardPlugin wgPlugin;
     private WGRegionEffectsListener listener;
     
-    public static final Map<Player, List<PotionEffectDesc>> playerEffects = new HashMap<>();
-    public static List<Player> ignoredPlayers = new ArrayList<>();
+    public static final Map<Player, List<PotionEffectDesc>> playerEffects = new HashMap<Player, List<PotionEffectDesc>>();
+    public static List<Player> ignoredPlayers = new ArrayList<Player>();
     
     @Override
     public void onEnable()
@@ -116,7 +116,7 @@ public class WGRegionEffectsPlugin extends JavaPlugin {
                     {
                         continue;
                     }
-                    List<PotionEffectDesc> effects = new ArrayList<>(playerEffects.get(p));
+                    List<PotionEffectDesc> effects = new ArrayList<PotionEffectDesc>(playerEffects.get(p));
                     if (effects == null) {
                         continue;
                     }
