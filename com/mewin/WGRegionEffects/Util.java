@@ -87,22 +87,25 @@ public class Util {
         
         ProtectedRegion global = rm.getRegion("__global__");
         
-        Set<PotionEffectDesc> gEffects = (Set<PotionEffectDesc>) global.getFlag(WGRegionEffectsPlugin.EFFECT_FLAG);
-        
-        if (gEffects != null)
+        if (global != null)
         {
-            for (PotionEffectDesc effect : gEffects)
+            Set<PotionEffectDesc> gEffects = (Set<PotionEffectDesc>) global.getFlag(WGRegionEffectsPlugin.EFFECT_FLAG);
+
+            if (gEffects != null)
             {
-                if (!allEffects.containsKey(effect.getType()))
+                for (PotionEffectDesc effect : gEffects)
                 {
-                    allEffects.put(effect.getType(), new SimpleEntry<ProtectedRegion, PotionEffectDesc>(global, effect));
+                    if (!allEffects.containsKey(effect.getType()))
+                    {
+                        allEffects.put(effect.getType(), new SimpleEntry<ProtectedRegion, PotionEffectDesc>(global, effect));
+                    }
                 }
             }
-        }
-        
-        for (Entry<ProtectedRegion, PotionEffectDesc> entry : allEffects.values())
-        {
-            effects.add(entry.getValue());
+
+            for (Entry<ProtectedRegion, PotionEffectDesc> entry : allEffects.values())
+            {
+                effects.add(entry.getValue());
+            }
         }
         
         return effects;
