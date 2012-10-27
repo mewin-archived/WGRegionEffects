@@ -125,7 +125,15 @@ public class WGRegionEffectsPlugin extends JavaPlugin {
                     {
                         continue;
                     }
-                    List<PotionEffectDesc> effects = new ArrayList<PotionEffectDesc>(playerEffects.get(p));
+                    List<PotionEffectDesc> effects;
+                    try
+                    {
+                        effects = new ArrayList<PotionEffectDesc>(playerEffects.get(p));
+                    }
+                    catch(NullPointerException ex)
+                    {
+                        continue;
+                    }
                     if (effects == null) {
                         continue;
                     }
