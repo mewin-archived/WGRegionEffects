@@ -45,7 +45,21 @@ public class PotionEffectDesc {
     
     public PotionEffect createEffect()
     {
-        return type.createEffect(40, amplifier);
+        if (this.type.equals(PotionEffectType.BLINDNESS) 
+                || this.type.equals(PotionEffectType.NIGHT_VISION)
+                || this.type.equals(PotionEffectType.CONFUSION))
+        {
+            return type.createEffect((int) (400  / type.getDurationModifier()), amplifier);
+        }
+        else if(this.type.equals(PotionEffectType.POISON)
+                || this.type.equals(PotionEffectType.WITHER))
+        {
+            return type.createEffect((int) (80 / type.getDurationModifier()), amplifier);
+        }
+        else
+        {
+            return type.createEffect((int) (40 / type.getDurationModifier()), amplifier);
+        }
     }
     
     @Override

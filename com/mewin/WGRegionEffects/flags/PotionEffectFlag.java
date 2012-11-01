@@ -121,5 +121,4 @@ public class PotionEffectFlag extends CustomFlag<PotionEffectDesc>{
             throw new InvalidFlagFormat("Number expected, string found: " + is);
         }
     }
-    
 }
