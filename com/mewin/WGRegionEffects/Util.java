@@ -102,11 +102,11 @@ public class Util {
                     }
                 }
             }
+        }
 
-            for (Entry<ProtectedRegion, PotionEffectDesc> entry : allEffects.values())
-            {
-                effects.add(entry.getValue());
-            }
+        for (Entry<ProtectedRegion, PotionEffectDesc> entry : allEffects.values())
+        {
+            effects.add(entry.getValue());
         }
         
         return effects;
