@@ -23,6 +23,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
 /**
@@ -56,6 +57,12 @@ public class WGRegionEffectsListener implements Listener {
     public synchronized void onPlayerDeath(PlayerDeathEvent e)
     {
         WGRegionEffectsPlugin.playerEffects.remove(e.getEntity());
+    }
+    
+    @EventHandler
+    public synchronized void onPlayerQuit(PlayerQuitEvent e)
+    {
+        WGRegionEffectsPlugin.playerEffects.remove(e.getPlayer());
     }
     
     @EventHandler
