@@ -23,7 +23,10 @@ import org.bukkit.potion.PotionEffectType;
  *
  * @author mewin
  */
-public class PotionEffectDesc {
+public class PotionEffectDesc
+{
+    public static int defaultLength = 40;
+    
     private PotionEffectType type;
     private int amplifier;
     
@@ -49,16 +52,16 @@ public class PotionEffectDesc {
                 || this.type.equals(PotionEffectType.NIGHT_VISION)
                 || this.type.equals(PotionEffectType.CONFUSION))
         {
-            return type.createEffect((int) (400  / type.getDurationModifier()), amplifier);
+            return type.createEffect((int) (Math.max(400, defaultLength)  / type.getDurationModifier()), amplifier);
         }
         else if(this.type.equals(PotionEffectType.POISON)
                 || this.type.equals(PotionEffectType.WITHER))
         {
-            return type.createEffect((int) (80 / type.getDurationModifier()), amplifier);
+            return type.createEffect((int) (Math.max(80, defaultLength) / type.getDurationModifier()), amplifier);
         }
         else
         {
-            return type.createEffect((int) (40 / type.getDurationModifier()), amplifier);
+            return type.createEffect((int) (Math.max(40, defaultLength) / type.getDurationModifier()), amplifier);
         }
     }
     
