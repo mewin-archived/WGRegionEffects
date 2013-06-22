@@ -85,6 +85,7 @@ public class WGRegionEffectsPlugin extends JavaPlugin {
         {
             wgPlugin = (WorldGuardPlugin) plug;
         }
+        loadConfig();
         
         listener = new WGRegionEffectsListener(wgPlugin, this);
         
@@ -97,7 +98,7 @@ public class WGRegionEffectsPlugin extends JavaPlugin {
     
     private void loadConfig()
     {
-        confFile.mkdirs();
+        confFile.getParentFile().mkdirs();
         getConfig().set("effect-duration", 2000);
         getConfig().set("effect-tick-delay", 1000);
         if (!confFile.exists())
@@ -128,7 +129,7 @@ public class WGRegionEffectsPlugin extends JavaPlugin {
             }
         }
         
-        PotionEffectDesc.defaultLength = getConfig().getInt("effect-duration", 2000) / 500;
+        PotionEffectDesc.defaultLength = getConfig().getInt("effect-duration", 2000) / 50;
         tickDelay = getConfig().getInt("effect-tick-delay", 1000) / 50;
     }
 
@@ -136,21 +137,29 @@ public class WGRegionEffectsPlugin extends JavaPlugin {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {
         if (cmd.getName().equalsIgnoreCase("toggleeffects")
-                || cmd.getName().equalsIgnoreCase("te")) {
-            if (sender instanceof Player) {
+                || cmd.getName().equalsIgnoreCase("te"))
+        {
+            if (sender instanceof Player)
+            {
                 Player player = (Player) sender;
 
-                if (!player.hasPermission("effects.toggle")) {
+                if (!player.hasPermission("effects.toggle"))
+                {
                     player.sendMessage(ChatColor.RED + "You don't have permission for that.");
                 }
-                else if (WGRegionEffectsPlugin.ignoredPlayers.contains(player)) {
+                else if (WGRegionEffectsPlugin.ignoredPlayers.contains(player))
+                {
                     WGRegionEffectsPlugin.ignoredPlayers.remove(player);
                     player.sendMessage(ChatColor.GOLD + "Region effects toggled on.");
-                } else {
+                }
+                else
+                {
                     WGRegionEffectsPlugin.ignoredPlayers.add(player);
                     player.sendMessage(ChatColor.GOLD + "Region effects toggled off.");
                 }
-            } else {
+            }
+            else
+            {
                 sender.sendMessage("How could a console be affected by effects?");
             }
             return true;
