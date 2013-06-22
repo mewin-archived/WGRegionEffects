@@ -22,11 +22,14 @@ import com.mewin.WGRegionEffects.flags.PotionEffectDesc;
 import com.mewin.WGRegionEffects.flags.PotionEffectFlag;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.flags.RegionGroup;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -46,6 +49,8 @@ public class WGRegionEffectsPlugin extends JavaPlugin {
     private WGCustomFlagsPlugin custPlugin;
     private WorldGuardPlugin wgPlugin;
     private WGRegionEffectsListener listener;
+    private File confFile;
+    private int tickDelay = 20;
     
     public static final Map<Player, List<PotionEffectDesc>> playerEffects = new HashMap<Player, List<PotionEffectDesc>>();
     public static List<Player> ignoredPlayers = new ArrayList<Player>();
@@ -54,6 +59,8 @@ public class WGRegionEffectsPlugin extends JavaPlugin {
     public void onEnable()
     {
         Plugin plug = getServer().getPluginManager().getPlugin("WGCustomFlags");
+     
+        confFile = new File(this.getDataFolder(), "config.yml");
         
         if (plug == null || !(plug instanceof WGCustomFlagsPlugin) || !plug.isEnabled())
         {
@@ -87,9 +94,47 @@ public class WGRegionEffectsPlugin extends JavaPlugin {
         
         scheduleTask();
     }
+    
+    private void loadConfig()
+    {
+        confFile.mkdirs();
+        getConfig().set("effect-duration", 2000);
+        getConfig().set("effect-tick-delay", 1000);
+        if (!confFile.exists())
+        {
+            try
+            {
+                if (!confFile.createNewFile())
+                {
+                    throw new IOException("Could not create configuration file.");
+                }
+                getLogger().log(Level.INFO, "Configuration does not exist. Creating default config.yml.");
+                getConfig().save(confFile);
+            }
+            catch(IOException ex)
+            {
+                getLogger().log(Level.WARNING, "Could not write default configuration: ", ex);
+            }
+        }
+        else
+        {
+            try
+            {
+                getConfig().load(confFile);
+            }
+            catch(Exception ex)
+            {
+                getLogger().log(Level.WARNING, "Could not load configuration:", ex);
+            }
+        }
+        
+        PotionEffectDesc.defaultLength = getConfig().getInt("effect-duration", 2000) / 500;
+        tickDelay = getConfig().getInt("effect-tick-delay", 1000) / 50;
+    }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
+    {
         if (cmd.getName().equalsIgnoreCase("toggleeffects")
                 || cmd.getName().equalsIgnoreCase("te")) {
             if (sender instanceof Player) {
@@ -176,6 +221,6 @@ public class WGRegionEffectsPlugin extends JavaPlugin {
                 }
             }
             
-        }, 20L, 5L);
+        }, tickDelay, 5L);
     }
 }
