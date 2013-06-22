@@ -230,6 +230,6 @@ public class WGRegionEffectsPlugin extends JavaPlugin {
                 }
             }
             
-        }, tickDelay, 5L);
+        }, 5L, tickDelay);
     }
 }
