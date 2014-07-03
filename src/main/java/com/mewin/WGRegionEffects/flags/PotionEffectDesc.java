@@ -46,9 +46,14 @@ public class PotionEffectDesc
         return amplifier;
     }
     
+    public PotionEffect createEffect(int duration)
+    {
+        return type.createEffect(duration, amplifier);
+    }
+    
     public PotionEffect createEffect()
     {
-        if (this.type.equals(PotionEffectType.BLINDNESS) 
+        /*if (this.type.equals(PotionEffectType.BLINDNESS) 
                 || this.type.equals(PotionEffectType.NIGHT_VISION)
                 || this.type.equals(PotionEffectType.CONFUSION))
         {
@@ -62,7 +67,8 @@ public class PotionEffectDesc
         else
         {
             return type.createEffect((int) (Math.max(40, defaultLength) / type.getDurationModifier()), amplifier);
-        }
+        }*/
+        return createEffect((int) (1000000 / type.getDurationModifier()));
     }
     
     @Override
