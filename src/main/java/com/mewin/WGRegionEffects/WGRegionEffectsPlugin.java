@@ -120,7 +120,7 @@ public class WGRegionEffectsPlugin extends JavaPlugin {
     private void loadConfig()
     {
         confFile.getParentFile().mkdirs();
-        getConfig().set("effect-duration", 2000);
+        getConfig().set("effect-duration", 1000000);
         getConfig().set("effect-tick-delay", 1000);
         if (!confFile.exists())
         {
@@ -150,7 +150,7 @@ public class WGRegionEffectsPlugin extends JavaPlugin {
             }
         }
         
-        PotionEffectDesc.defaultLength = getConfig().getInt("effect-duration", 2000) / 50;
+        PotionEffectDesc.defaultLength = getConfig().getInt("effect-duration", 1000000) / 50;
         tickDelay = getConfig().getInt("effect-tick-delay", 1000) / 50;
     }
     
