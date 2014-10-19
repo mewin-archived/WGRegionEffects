@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 mewin
+ * Copyright (C) 2014 mewin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,8 +27,8 @@ public class PotionEffectDesc
 {
     public static int defaultLength = 40;
     
-    private PotionEffectType type;
-    private int amplifier;
+    private final PotionEffectType type;
+    private final int amplifier;
     
     public PotionEffectDesc(PotionEffectType type, int amplifier)
     {
@@ -53,21 +53,6 @@ public class PotionEffectDesc
     
     public PotionEffect createEffect()
     {
-        /*if (this.type.equals(PotionEffectType.BLINDNESS) 
-                || this.type.equals(PotionEffectType.NIGHT_VISION)
-                || this.type.equals(PotionEffectType.CONFUSION))
-        {
-            return type.createEffect((int) (Math.max(400, defaultLength)  / type.getDurationModifier()), amplifier);
-        }
-        else if(this.type.equals(PotionEffectType.POISON)
-                || this.type.equals(PotionEffectType.WITHER))
-        {
-            return type.createEffect((int) (Math.max(80, defaultLength) / type.getDurationModifier()), amplifier);
-        }
-        else
-        {
-            return type.createEffect((int) (Math.max(40, defaultLength) / type.getDurationModifier()), amplifier);
-        }*/
         return createEffect((int) (1000000 / type.getDurationModifier()));
     }
     
