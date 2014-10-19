@@ -1,0 +1,3 @@
+effects:
+  field: com.mewin.WGRegionEffects.WGRegionEffectsPlugin.EFFECT_FLAG
+  description: set effects to apply to a player inside a region

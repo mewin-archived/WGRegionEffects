@@ -51,10 +51,11 @@ import org.bukkit.scheduler.BukkitTask;
  *
  * @author mewin <mewin001@hotmail.de>
  */
-public class WGRegionEffectsPlugin extends JavaPlugin {
+public class WGRegionEffectsPlugin extends JavaPlugin
+{
     public static final CustomSetFlag EFFECT_FLAG = new CustomSetFlag("effects", new PotionEffectFlag("effect", RegionGroup.ALL));
     
-    private WGCustomFlagsPlugin custPlugin;
+    //private WGCustomFlagsPlugin custPlugin;
     private WorldGuardPlugin wgPlugin;
     private WGRegionEffectsListener listener;
     private File confFile, cacheFile;
@@ -81,10 +82,12 @@ public class WGRegionEffectsPlugin extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+        /*
         else
         {
             custPlugin = (WGCustomFlagsPlugin) plug;
         }
+        */
         
         plug = getServer().getPluginManager().getPlugin("WorldGuard");
         
@@ -105,7 +108,7 @@ public class WGRegionEffectsPlugin extends JavaPlugin {
         
         getServer().getPluginManager().registerEvents(listener, plug);
         
-        custPlugin.addCustomFlag(EFFECT_FLAG);
+        //custPlugin.addCustomFlag(EFFECT_FLAG); //use flags.yml now
         
         scheduleTask();
     }
