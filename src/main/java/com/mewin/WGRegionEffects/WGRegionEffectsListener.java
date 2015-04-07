@@ -24,6 +24,7 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -58,7 +59,14 @@ public class WGRegionEffectsListener implements Listener {
                     {
                         WGRegionEffectsPlugin.playerEffects.put(e.getPlayer().getName(), new HashSet<PotionEffectDesc>());
                     }
-                    WGRegionEffectsPlugin.playerEffects.get(e.getPlayer().getName()).add(effect);
+                    if (effect.getType() != null)
+                    {
+                        WGRegionEffectsPlugin.playerEffects.get(e.getPlayer().getName()).add(effect);
+                    }
+                    else
+                    {
+                        plugin.getLogger().log(Level.WARNING, "Invalid effect type in region {0}.", region.getId());
+                    }
                 }
             }
         }

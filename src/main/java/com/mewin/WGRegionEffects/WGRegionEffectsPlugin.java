@@ -191,7 +191,15 @@ public class WGRegionEffectsPlugin extends JavaPlugin
                                         getLogger().log(Level.WARNING, "Invalid amplifier: {0}", split[1]);
                                     }
                                 }
-                                playerEffects.get(player).add(new PotionEffectDesc(PotionEffectType.getByName(name), amplifier));
+                                PotionEffectType type = PotionEffectType.getByName(name);
+                                if (type != null)
+                                {
+                                    playerEffects.get(player).add(new PotionEffectDesc(type, amplifier));
+                                }
+                                else
+                                {
+                                    getLogger().log(Level.WARNING, "Invalid effect type: {0}", name);
+                                }
                             }
                         }
                     }
@@ -222,7 +230,15 @@ public class WGRegionEffectsPlugin extends JavaPlugin
                                         getLogger().log(Level.WARNING, "Invalid amplifier: {0}", split[1]);
                                     }
                                 }
-                                activeEffects.get(player).add(new PotionEffectDesc(PotionEffectType.getByName(name), amplifier));
+                                PotionEffectType type = PotionEffectType.getByName(name);
+                                if (type != null)
+                                {
+                                    activeEffects.get(player).add(new PotionEffectDesc(type, amplifier));
+                                }
+                                else
+                                {
+                                    getLogger().log(Level.WARNING, "Invalid effect type: {0}", name);
+                                }
                             }
                         }
                     }
