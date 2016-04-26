@@ -4,7 +4,7 @@
 
   <groupId>com.mewin</groupId>
   <artifactId>WGRegionEffects</artifactId>
-  <version>1.4</version>
+  <version>1.4.1</version>
   <packaging>jar</packaging>
 
   <name>WGRegionEffects</name>
@@ -30,7 +30,7 @@
   <repositories>
       <repository>
           <id>bukkit-repo</id>
-          <url>http://repo.bukkit.org/content/groups/public/</url>
+          <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
       </repository>
       <repository>
           <id>sk89q-repo</id>
@@ -47,56 +47,22 @@
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.7.9-R0.2</version>
+            <version>1.9.2-R0.1-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
         <!-- WorldGuard Dependency -->
         <dependency>
             <groupId>com.sk89q</groupId>
             <artifactId>worldguard</artifactId>
-            <version>5.8-SNAPSHOT</version>
+            <version>6.1</version>
             <type>jar</type>
-            <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <artifactId>truezip</artifactId>
-                    <groupId>de.schlichtherle</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>prtree</artifactId>
-                    <groupId>org.khelekore</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>opencsv</artifactId>
-                    <groupId>net.sf.opencsv</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>junit</artifactId>
-                    <groupId>junit</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>js</artifactId>
-                    <groupId>rhino</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>jchronic</artifactId>
-                    <groupId>com.sk89q</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>iconomy</artifactId>
-                    <groupId>com.nijikokun</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>commandbook</artifactId>
-                    <groupId>com.sk89q</groupId>
-                </exclusion>
-            </exclusions>
+            <scope>provided</scope>
         </dependency>
         <!-- WGCustomFlags dependency -->
         <dependency>
             <groupId>com.mewin</groupId>
             <artifactId>WGCustomFlags</artifactId>
-            <version>1.7.1</version>
+            <version>1.9</version>
             <type>jar</type>
         </dependency>
         <!-- WGRegionEvents dependency -->
@@ -107,11 +73,4 @@
             <type>jar</type>
         </dependency>
     </dependencies>
-    <distributionManagement>
-        <repository>
-            <id>local.repo</id>
-            <name>Mewin Repository</name>
-            <url>file:///var/www/maven</url>
-        </repository>
-    </distributionManagement>
 </project>
