@@ -4,7 +4,7 @@ description: 'WorldGuard extension to let players automatically get a potion eff
 version: 1.4
 
 authors: [ mewin ]
-depend: [ WorldGuard, WGCustomFlags ]
+depend: [ WorldGuard, WGCustomFlags, WGRegionEvents ]
 softdepend: [ WorldEdit ]
 authors: [ mewin ]
 
