@@ -288,8 +288,8 @@ public class WGRegionEffectsPlugin extends JavaPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {
-        if (cmd.getName().equalsIgnoreCase("toggleeffects")
-                || cmd.getName().equalsIgnoreCase("te"))
+        if (cmd.getName().equalsIgnoreCase("regioneffects")
+                || cmd.getName().equalsIgnoreCase("rge"))
         {
             if (sender instanceof Player)
             {
